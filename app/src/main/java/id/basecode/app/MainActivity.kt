@@ -127,7 +127,8 @@ fun BaseCodeApp() {
                 onTryEditor = { screen = Screen.Editor("sample.py", SAMPLE_CODE, null) },
                 onOpenFile = { openLauncher.launch(arrayOf("*/*")) },
                 recents = recents,
-                onOpenRecent = { openUri(Uri.parse(it)) }
+                onOpenRecent = { openUri(Uri.parse(it)) },
+                plugins = remember { PluginEngine.listInstalled(context) }
             )
             is Screen.Editor -> key(s.uri ?: s.fileName) {
                 EditorScreen(
@@ -150,7 +151,8 @@ fun BaseCodeHome(
     onTryEditor: () -> Unit,
     onOpenFile: () -> Unit,
     recents: List<FileBridge.RecentFile>,
-    onOpenRecent: (String) -> Unit
+    onOpenRecent: (String) -> Unit,
+    plugins: List<PluginManifest>
 ) {
     Column(
         modifier = Modifier
@@ -212,6 +214,28 @@ fun BaseCodeHome(
                     )
                     Divider(color = MaterialTheme.colorScheme.surfaceVariant)
                 }
+            }
+        }
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = stringResource(R.string.plugins_title, plugins.size),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        if (plugins.isEmpty()) {
+            Text(
+                text = stringResource(R.string.plugins_empty),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        } else {
+            plugins.forEach { plugin ->
+                Text(
+                    text = "${plugin.name} v${'$'}{plugin.version}",
+                    fontFamily = FontFamily.Monospace,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
             }
         }
     }

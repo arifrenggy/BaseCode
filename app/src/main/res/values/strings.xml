@@ -26,4 +26,6 @@
     <string name="btn_run">Run</string>
     <string name="btn_copy">Copy</string>
     <string name="command_copied">Command copied to clipboard</string>
+    <string name="plugins_title">Plugins (%1$d)</string>
+    <string name="plugins_empty">No plugins installed yet. Plugin API arrives in the next release.</string>
 </resources>

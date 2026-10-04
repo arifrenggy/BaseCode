@@ -26,4 +26,6 @@
     <string name="btn_run">Jalankan</string>
     <string name="btn_copy">Salin</string>
     <string name="command_copied">Perintah disalin ke clipboard</string>
+    <string name="plugins_title">Plugin (%1$d)</string>
+    <string name="plugins_empty">Belum ada plugin terpasang. API plugin hadir di rilis berikutnya.</string>
 </resources>
