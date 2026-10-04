@@ -1,0 +1,36 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: BaseCode-debug-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+# Catatan: file ini belum aktif di repo karena token yang dipakai agen
+# tidak memiliki scope `workflow`. Untuk mengaktifkan CI:
+# 1. Buka repo di GitHub -> Add file -> Create new file
+# 2. Nama: .github/workflows/android.yml
+# 3. Salin isi file ini, commit. CI langsung jalan di push berikutnya.
