@@ -11,4 +11,5 @@
     <string name="btn_undo">Urungkan</string>
     <string name="btn_redo">Ulangi</string>
     <string name="editor_untitled">Tanpa judul</string>
+    <string name="btn_try_editor">Coba editornya</string>
 </resources>

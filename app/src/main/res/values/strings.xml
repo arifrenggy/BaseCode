@@ -11,4 +11,5 @@
     <string name="btn_undo">Undo</string>
     <string name="btn_redo">Redo</string>
     <string name="editor_untitled">Untitled</string>
+    <string name="btn_try_editor">Try the editor</string>
 </resources>
