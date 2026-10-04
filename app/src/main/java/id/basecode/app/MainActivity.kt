@@ -19,7 +19,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import io.github.rosemoe.sora.widget.EditorSearcher
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -43,6 +45,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.foundation.layout.width
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -225,6 +229,17 @@ fun EditorScreen(
     val editor = remember {
         EditorCore.createEditor(context).apply { setText(initialContent) }
     }
+    var searchVisible by remember { mutableStateOf(false) }
+    var query by remember { mutableStateOf("") }
+
+    fun doSearch() {
+        if (query.isEmpty()) {
+            editor.searcher.stopSearch()
+        } else {
+            // pencarian biasa (case-sensitive, bukan regex)
+            editor.searcher.search(query, EditorSearcher.SearchOptions(false, false))
+        }
+    }
 
     LaunchedEffect(fileName) {
         EditorCore.applyLanguage(editor, fileName)
@@ -290,6 +305,44 @@ fun EditorScreen(
                 }
                 OutlinedButton(onClick = { editor.redo() }) {
                     Text(stringResource(R.string.btn_redo))
+                }
+                OutlinedButton(onClick = { searchVisible = !searchVisible }) {
+                    Text(stringResource(R.string.btn_find))
+                }
+            }
+
+            if (searchVisible) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    OutlinedTextField(
+                        value = query,
+                        onValueChange = {
+                            query = it
+                            doSearch()
+                        },
+                        placeholder = { Text(stringResource(R.string.find_hint)) },
+                        singleLine = true,
+                        textStyle = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.weight(1f)
+                    )
+                    TextButton(onClick = { editor.searcher.gotoPrevious() }) {
+                        Text(stringResource(R.string.btn_find_prev))
+                    }
+                    TextButton(onClick = { editor.searcher.gotoNext() }) {
+                        Text(stringResource(R.string.btn_find_next))
+                    }
+                    TextButton(onClick = {
+                        editor.searcher.stopSearch()
+                        query = ""
+                        searchVisible = false
+                    }) {
+                        Text(stringResource(R.string.btn_close))
+                    }
                 }
             }
         }

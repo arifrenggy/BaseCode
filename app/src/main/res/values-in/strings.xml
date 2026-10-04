@@ -14,4 +14,9 @@
     <string name="btn_try_editor">Coba editornya</string>
     <string name="cannot_open_file">File tidak bisa dibuka</string>
     <string name="cannot_save_file">File tidak bisa disimpan</string>
+    <string name="btn_find">Cari</string>
+    <string name="find_hint">Cari dalam file</string>
+    <string name="btn_find_prev">Sblm</string>
+    <string name="btn_find_next">Brkt</string>
+    <string name="btn_close">Tutup</string>
 </resources>
