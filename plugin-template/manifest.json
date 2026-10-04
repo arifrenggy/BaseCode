@@ -1,0 +1,10 @@
+{
+  "id": "com.example.my-plugin",
+  "name": "My First BaseCode Plugin",
+  "version": "0.1.0",
+  "description": "Contoh plugin BaseCode: tambah perintah hello.",
+  "author": "Your Name",
+  "permissions": ["ui"],
+  "entry": "main.js",
+  "engines": { "basecode": ">=0.1.0" }
+}
