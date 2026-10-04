@@ -12,4 +12,6 @@
     <string name="btn_redo">Ulangi</string>
     <string name="editor_untitled">Tanpa judul</string>
     <string name="btn_try_editor">Coba editornya</string>
+    <string name="cannot_open_file">File tidak bisa dibuka</string>
+    <string name="cannot_save_file">File tidak bisa disimpan</string>
 </resources>

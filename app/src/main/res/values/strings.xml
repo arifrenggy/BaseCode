@@ -12,4 +12,6 @@
     <string name="btn_redo">Redo</string>
     <string name="editor_untitled">Untitled</string>
     <string name="btn_try_editor">Try the editor</string>
+    <string name="cannot_open_file">Can't open the file</string>
+    <string name="cannot_save_file">Can't save the file</string>
 </resources>
