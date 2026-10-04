@@ -72,7 +72,7 @@ object EditorCore {
         setup(context)
         val editor = CodeEditor(context)
         editor.colorScheme = TextMateColorScheme.create(ThemeRegistry.getInstance())
-        editor.setWordWrap(false)
+        editor.setWordwrap(false)
         editor.setTextSize(14f)
         editor.setLineSpacing(2f, 1.2f)
         editor.isLineNumberEnabled = true
