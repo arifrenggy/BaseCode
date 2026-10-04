@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BaseCode</string>
+    <string name="tagline">Editor kode native untuk Android, bergaya VS Code</string>
+    <string name="hello_world">Halo, BaseCode! Kerangka sudah jalan.</string>
+    <string name="btn_open_file">Buka file</string>
+    <string name="recents_title">File terakhir dibuka</string>
+    <string name="no_recents">Belum ada file terakhir. Yuk buka satu!</string>
+    <string name="btn_save">Simpan</string>
+    <string name="saved_toast">Tersimpan</string>
+    <string name="btn_back">Kembali</string>
+    <string name="btn_undo">Urungkan</string>
+    <string name="btn_redo">Ulangi</string>
+    <string name="editor_untitled">Tanpa judul</string>
+</resources>
