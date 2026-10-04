@@ -19,4 +19,11 @@
     <string name="btn_find_prev">Sblm</string>
     <string name="btn_find_next">Brkt</string>
     <string name="btn_close">Tutup</string>
+    <string name="btn_termux">Termux</string>
+    <string name="termux_dialog_title">Jalankan di Termux</string>
+    <string name="termux_not_installed">Termux belum terpasang. Pasang dulu dari F-Droid atau Play Store.</string>
+    <string name="termux_hint">Perintah yang dijalankan di Termux (file harus bisa dijangkau Termux, mis. di home Termux):</string>
+    <string name="btn_run">Jalankan</string>
+    <string name="btn_copy">Salin</string>
+    <string name="command_copied">Perintah disalin ke clipboard</string>
 </resources>

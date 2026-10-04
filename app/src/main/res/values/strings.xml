@@ -19,4 +19,11 @@
     <string name="btn_find_prev">Prev</string>
     <string name="btn_find_next">Next</string>
     <string name="btn_close">Close</string>
+    <string name="btn_termux">Termux</string>
+    <string name="termux_dialog_title">Run in Termux</string>
+    <string name="termux_not_installed">Termux is not installed. Install it from F-Droid or Play Store first.</string>
+    <string name="termux_hint">Command to run in Termux (file must be reachable from Termux, e.g. inside Termux home):</string>
+    <string name="btn_run">Run</string>
+    <string name="btn_copy">Copy</string>
+    <string name="command_copied">Command copied to clipboard</string>
 </resources>

@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import io.github.rosemoe.sora.widget.EditorSearcher
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Divider
@@ -231,6 +232,8 @@ fun EditorScreen(
     }
     var searchVisible by remember { mutableStateOf(false) }
     var query by remember { mutableStateOf("") }
+    var termuxVisible by remember { mutableStateOf(false) }
+    var termuxCommand by remember { mutableStateOf(TermuxBridge.defaultCommand(fileName)) }
 
     fun doSearch() {
         if (query.isEmpty()) {
@@ -309,6 +312,69 @@ fun EditorScreen(
                 OutlinedButton(onClick = { searchVisible = !searchVisible }) {
                     Text(stringResource(R.string.btn_find))
                 }
+                TextButton(onClick = { termuxVisible = true }) {
+                    Text(stringResource(R.string.btn_termux))
+                }
+            }
+
+            if (termuxVisible) {
+                AlertDialog(
+                    onDismissRequest = { termuxVisible = false },
+                    title = { Text(stringResource(R.string.termux_dialog_title)) },
+                    text = {
+                        Column {
+                            if (!TermuxBridge.isInstalled(context)) {
+                                Text(
+                                    stringResource(R.string.termux_not_installed),
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            } else {
+                                Text(stringResource(R.string.termux_hint))
+                                Spacer(modifier = Modifier.height(8.dp))
+                                OutlinedTextField(
+                                    value = termuxCommand,
+                                    onValueChange = { termuxCommand = it },
+                                    singleLine = true,
+                                    textStyle = androidx.compose.ui.text.TextStyle(
+                                        fontFamily = FontFamily.Monospace
+                                    )
+                                )
+                            }
+                        }
+                    },
+                    confirmButton = {
+                        TextButton(
+                            enabled = TermuxBridge.isInstalled(context),
+                            onClick = {
+                                when (TermuxBridge.sendCommand(context, termuxCommand)) {
+                                    TermuxBridge.SendResult.Sent -> {
+                                        termuxVisible = false
+                                    }
+                                    TermuxBridge.SendResult.PermissionDenied -> {
+                                        TermuxBridge.copyCommand(context, termuxCommand)
+                                        termuxVisible = false
+                                    }
+                                    TermuxBridge.SendResult.NotInstalled -> {
+                                        termuxVisible = false
+                                    }
+                                }
+                            }
+                        ) {
+                            Text(stringResource(R.string.btn_run))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = {
+                            TermuxBridge.copyCommand(context, termuxCommand)
+                            termuxVisible = false
+                            scope.launch {
+                                snackbar.showSnackbar(context.getString(R.string.command_copied))
+                            }
+                        }) {
+                            Text(stringResource(R.string.btn_copy))
+                        }
+                    }
+                )
             }
 
             if (searchVisible) {
