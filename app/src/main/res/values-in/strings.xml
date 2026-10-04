@@ -28,4 +28,7 @@
     <string name="command_copied">Perintah disalin ke clipboard</string>
     <string name="plugins_title">Plugin (%1$d)</string>
     <string name="plugins_empty">Belum ada plugin terpasang. API plugin hadir di rilis berikutnya.</string>
+    <string name="status_new_file">Berkas baru</string>
+    <string name="status_ready">Siap</string>
+    <string name="rename_dialog_title">Ubah nama berkas</string>
 </resources>

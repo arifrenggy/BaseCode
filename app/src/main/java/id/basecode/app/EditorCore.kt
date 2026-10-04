@@ -91,3 +91,40 @@ object EditorCore {
         }
     }
 }
+
+/** Operasi tambahan untuk toolbar quick-key ala Acode. */
+object EditorActions {
+
+    /** Pindahkan baris saat ini ke atas, menukar posisi dengan baris sebelumnya. */
+    fun moveLineUp(editor: io.github.rosemoe.sora.widget.CodeEditor) {
+        val cursor = editor.cursor
+        if (cursor.isSelected) return
+        val line = cursor.leftLine
+        if (line <= 0) return
+        val content = editor.text
+        val current = content.getLineString(line)
+        val previous = content.getLineString(line - 1)
+        val column = cursor.leftColumn
+        content.replace(line - 1, 0, line, current.length, current + "\n" + previous)
+        editor.setSelection(line - 1, column)
+    }
+
+    /** Pindahkan baris saat ini ke bawah, menukar posisi dengan baris berikutnya. */
+    fun moveLineDown(editor: io.github.rosemoe.sora.widget.CodeEditor) {
+        val cursor = editor.cursor
+        if (cursor.isSelected) return
+        val line = cursor.leftLine
+        val content = editor.text
+        if (line >= content.lineCount - 1) return
+        val current = content.getLineString(line)
+        val next = content.getLineString(line + 1)
+        val column = cursor.leftColumn
+        content.replace(line, 0, line + 1, next.length, next + "\n" + current)
+        editor.setSelection(line + 1, column)
+    }
+
+    /** Sisipkan tab/indentasi pada posisi kursor. */
+    fun insertTab(editor: io.github.rosemoe.sora.widget.CodeEditor) {
+        editor.insertText("\t", 0)
+    }
+}

@@ -28,4 +28,7 @@
     <string name="command_copied">Command copied to clipboard</string>
     <string name="plugins_title">Plugins (%1$d)</string>
     <string name="plugins_empty">No plugins installed yet. Plugin API arrives in the next release.</string>
+    <string name="status_new_file">New file</string>
+    <string name="status_ready">Ready</string>
+    <string name="rename_dialog_title">Rename file</string>
 </resources>
